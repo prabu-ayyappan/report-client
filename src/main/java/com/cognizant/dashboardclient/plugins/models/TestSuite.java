@@ -1,6 +1,8 @@
 package com.cognizant.dashboardclient.plugins.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Created by 784420 on 3/9/2020 7:48 PM
  */
 @Data
+@NoArgsConstructor
 public class TestSuite {
     private List<TestCase> testCases;
     private String packageName;
@@ -28,6 +31,7 @@ public class TestSuite {
     private String remarks;
 
 
+    @JsonIgnore
     public TestSuite(String packageName, String uniqueId, String name) {
         this.packageName = packageName;
         this.name = name;
@@ -43,20 +47,24 @@ public class TestSuite {
         this.testCases = new ArrayList<>();
     }
 
+    @JsonIgnore
     public void addSuccessCase(TestCase aCase){
         this.addCase(aCase);
         this.succeed.incrementAndGet();
     }
 
+    @JsonIgnore
     public void addFailCase(TestCase aCase){
         this.addCase(aCase);
         this.failed.incrementAndGet();
     }
 
+    @JsonIgnore
     public void addIgnoreCase(TestCase aCase){
         this.addCase(aCase);
         this.ignored.incrementAndGet();
     }
+    @JsonIgnore
     public void addCase(TestCase aCase) {
         this.testCases.add(aCase);
         this.testsCount.incrementAndGet();

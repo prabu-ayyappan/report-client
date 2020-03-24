@@ -4,7 +4,7 @@ plugins {
 
 group = 'com.cognizant'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -19,5 +19,9 @@ repositories {
 dependencies {
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
 	annotationProcessor 'org.projectlombok:lombok:1.18.8'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '2.2.1.RELEASE'
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.1.RELEASE'
+	compile group: 'io.github.openfeign', name: 'feign-jackson', version: '10.7.4'
+
 }
 
