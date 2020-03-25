@@ -1,10 +1,13 @@
 package com.cognizant.dashboardclient.plugins.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
@@ -19,6 +22,8 @@ public class TestSuite {
     private String packageName;
     private String name;
     private String result;
+    private Date startTime;
+    private Date endTime;
     private AtomicLong duration;
     private AtomicInteger testsCount;
 

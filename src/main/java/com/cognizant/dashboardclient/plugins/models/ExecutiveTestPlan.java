@@ -1,7 +1,10 @@
 package com.cognizant.dashboardclient.plugins.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,6 +16,8 @@ public class ExecutiveTestPlan {
     private String id;
     private String projectName;
     private String toolName;
+    private Date startTime;
+    private Date endTime;
     private AtomicInteger testSuitCount;
     private AtomicInteger testCaseCount;
     private List<TestSuite> testSuites;
