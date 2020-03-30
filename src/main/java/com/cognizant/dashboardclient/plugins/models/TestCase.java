@@ -3,6 +3,7 @@ package com.cognizant.dashboardclient.plugins.models;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by 784420 on 3/9/2020 7:41 PM
@@ -19,4 +20,5 @@ public class TestCase {
     private String parentId;
     private String remarks;
     private String exceptionStacktrace;
+    private List<String> logs;
 }

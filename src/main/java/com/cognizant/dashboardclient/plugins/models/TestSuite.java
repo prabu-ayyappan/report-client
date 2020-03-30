@@ -32,7 +32,7 @@ public class TestSuite {
     private String uniqueId;
     private String parentId;
     private String remarks;
-
+    private List<String> logs;
 
     @JsonIgnore
     public TestSuite(String packageName, String uniqueId, String name) {

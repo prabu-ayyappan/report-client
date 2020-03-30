@@ -26,4 +26,5 @@ public class ExecutiveTestPlan {
     private AtomicLong failed;
     private AtomicLong passed;
     private AtomicLong skipped;
+    private List<String> logs;
 }

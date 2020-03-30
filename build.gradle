@@ -34,5 +34,6 @@ dependencies {
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '2.2.1.RELEASE'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.1.RELEASE'
 	compile group: 'io.github.openfeign', name: 'feign-jackson', version: '10.7.4'
+	compile 'org.apache.logging.log4j:log4j-core:2.10.0'
 }
 
