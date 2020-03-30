@@ -1,9 +1,7 @@
 package com.cognizant.dashboardclient.plugins.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.time.Instant;
 import java.util.Date;
 
 /**
@@ -13,6 +11,7 @@ import java.util.Date;
 public class TestCase {
     protected String name;
     protected long duration;
+    private String description;
     private Date startTime;
     private Date endTime;
     protected String result;

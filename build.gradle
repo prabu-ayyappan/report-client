@@ -34,6 +34,5 @@ dependencies {
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-openfeign-core', version: '2.2.1.RELEASE'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.2.1.RELEASE'
 	compile group: 'io.github.openfeign', name: 'feign-jackson', version: '10.7.4'
-
 }
 

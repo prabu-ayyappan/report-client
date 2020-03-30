@@ -1,11 +1,9 @@
 package com.cognizant.dashboardclient.plugins.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,8 +26,8 @@ public class TestSuite {
     private AtomicInteger testsCount;
 
     private AtomicLong failed;
-    private AtomicLong succeed;
-    private AtomicLong ignored;
+    private AtomicLong passed;
+    private AtomicLong skipped;
 
     private String uniqueId;
     private String parentId;
@@ -41,13 +39,13 @@ public class TestSuite {
         this.packageName = packageName;
         this.name = name;
         this.uniqueId = uniqueId;
-        this.result = StatusEnum.SUCCESS.name();
+        this.result = StatusEnum.PASSED.name();
         this.duration = new AtomicLong(0L);
         this.testsCount = new AtomicInteger(0);
 
         this.failed = new AtomicLong(0);
-        this.succeed = new AtomicLong(0);
-        this.ignored = new AtomicLong(0);
+        this.passed = new AtomicLong(0);
+        this.skipped = new AtomicLong(0);
 
         this.testCases = new ArrayList<>();
     }
@@ -55,7 +53,7 @@ public class TestSuite {
     @JsonIgnore
     public void addSuccessCase(TestCase aCase){
         this.addCase(aCase);
-        this.succeed.incrementAndGet();
+        this.passed.incrementAndGet();
     }
 
     @JsonIgnore
@@ -67,15 +65,15 @@ public class TestSuite {
     @JsonIgnore
     public void addIgnoreCase(TestCase aCase){
         this.addCase(aCase);
-        this.ignored.incrementAndGet();
+        this.skipped.incrementAndGet();
     }
     @JsonIgnore
     public void addCase(TestCase aCase) {
         this.testCases.add(aCase);
         this.testsCount.incrementAndGet();
         this.duration.addAndGet(aCase.getDuration());
-        if (aCase.getResult().equals(StatusEnum.FAIL.name())){
-            this.result = StatusEnum.FAIL.name();
+        if (aCase.getResult().equals(StatusEnum.FAILED.name())){
+            this.result = StatusEnum.FAILED.name();
         }
     }
 }
