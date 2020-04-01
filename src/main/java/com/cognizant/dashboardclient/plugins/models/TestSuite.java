@@ -19,6 +19,7 @@ public class TestSuite {
     private List<TestCase> testCases;
     private String packageName;
     private String name;
+    private String description;
     private String result;
     private Date startTime;
     private Date endTime;
