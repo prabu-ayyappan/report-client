@@ -23,12 +23,12 @@ public class TestSuite {
     private String result;
     private Date startTime;
     private Date endTime;
-    private AtomicLong duration;
-    private AtomicInteger testsCount;
+    private AtomicLong duration = new AtomicLong();
+    private AtomicInteger testsCount = new AtomicInteger();
 
-    private AtomicLong failed;
-    private AtomicLong passed;
-    private AtomicLong skipped;
+    private AtomicLong failed = new AtomicLong();
+    private AtomicLong passed = new AtomicLong();
+    private AtomicLong skipped = new AtomicLong();
 
     private String uniqueId;
     private String parentId;

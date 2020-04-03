@@ -20,12 +20,12 @@ public class ExecutiveTestPlan {
     private Date startTime;
     private Date endTime;
 
-    private AtomicInteger testSuitCount;
-    private AtomicInteger testCaseCount;
+    private AtomicInteger testSuitCount = new AtomicInteger();
+    private AtomicInteger testCaseCount = new AtomicInteger();
     private List<TestSuite> testSuites;
 
-    private AtomicLong failed;
-    private AtomicLong passed;
-    private AtomicLong skipped;
+    private AtomicLong failed = new AtomicLong();
+    private AtomicLong passed = new AtomicLong();
+    private AtomicLong skipped = new AtomicLong();
     private List<String> logs;
 }

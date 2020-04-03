@@ -9,14 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Util {
 
-    private Util() {
-    }
-
-    public void logText(String logText) {
+    public static void logText(String logText) {
         log.info(logText);
     }
 
-    public void jsonString(Object object) {
+    public static void jsonString(Object object) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
@@ -26,4 +23,16 @@ public class Util {
             log.error("Exception while json parsing :", e);
         }
     }
+
+    public static String getLastIndexValue(String value, String delimiter) {
+        if (value == null || value.equals("") || !value.contains(delimiter)) {
+            return value;
+        }
+        int lastIndex = value.lastIndexOf(delimiter);
+        if (value.length() <= lastIndex+1){
+            return value;
+        }
+        return value.substring(lastIndex+1);
+    }
+
 }
