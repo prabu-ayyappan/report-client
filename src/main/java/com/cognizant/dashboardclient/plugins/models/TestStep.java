@@ -15,6 +15,7 @@ public class TestStep {
     private String result;
     private String uniqueId;
     private String parentId;
+    private Object argument;
     private String remarks;
     private String exceptionStacktrace;
     private List<String> logs;
