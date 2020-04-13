@@ -15,6 +15,7 @@ public class ExecutiveTestPlan {
     private String id;
     private String projectName;
     private String name;
+    private long launchNumber;
     private String description;
     private String toolName;
     private Date startTime;

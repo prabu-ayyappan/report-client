@@ -1,11 +1,16 @@
 package com.cognizant.dashboardclient.plugins.clients;
 
+import com.cognizant.dashboardclient.plugins.common.BaseConstants;
+import com.cognizant.dashboardclient.plugins.common.TProperties;
 import feign.Feign;
 import feign.Logger;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestReportMain {
 
@@ -17,5 +22,15 @@ public class TestReportMain {
                 .logger(new Slf4jLogger(TestReportClient.class))
                 .logLevel(Logger.Level.FULL)
                 .target(TestReportClient.class, feignURL);
+    }
+
+    public static Map<String, String> getHeaders(){
+        TProperties properties = TProperties.getInstance();
+        String token = properties.get(BaseConstants.TEST_REPORT_TOKEN);
+        String bearerToken = String.format("Bearer %s", token);
+        return new HashMap<String, String>(){{
+            put("Authorization", bearerToken);
+        }
+        };
     }
 }
