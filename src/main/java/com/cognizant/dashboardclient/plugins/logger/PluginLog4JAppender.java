@@ -18,10 +18,12 @@ public class PluginLog4JAppender extends AbstractAppender {
     private static PluginLog4JAppender instance ;
 
     public static PluginLog4JAppender getInstance(){
+        System.out.println("######################PluginLog4JAppender");
         return instance;
     }
 
     public static PluginLog4JAppender getInstance(String name, Filter filter, Layout<? extends Serializable> layout, boolean ignoreExceptions) {
+        System.out.println("######################PluginLog4JAppender");
         if (instance == null) {
             instance = new PluginLog4JAppender(name, filter, layout, true);
         }
@@ -32,10 +34,12 @@ public class PluginLog4JAppender extends AbstractAppender {
 
     protected PluginLog4JAppender(String name, Filter filter, Layout<? extends Serializable> layout) {
         super(name, filter, layout);
+        System.out.println("######################PluginLog4JAppender");
     }
 
     protected PluginLog4JAppender(String name, Filter filter, Layout<? extends Serializable> layout, final boolean ignoreExceptions) {
         super(name, filter, layout, ignoreExceptions);
+        System.out.println("######################PluginLog4JAppender");
     }
 
     @Override
