@@ -7,4 +7,8 @@ public class BaseConstants {
     public static final String TEST_REPORT_URL = "test.report.url";
     public static final String TEST_REPORT_TOKEN = "test.report.token";
     public static final String LEAP_COLLECTOR_PROPERTIES = "leap-collector.properties";
+
+    /*Log process message*/
+    public static final String LEAP_MESSAGE_FILE = "LEAP_MESSAGE#FILE#";
+
 }

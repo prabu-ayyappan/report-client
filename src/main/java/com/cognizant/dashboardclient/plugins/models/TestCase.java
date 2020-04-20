@@ -19,6 +19,7 @@ public class TestCase {
     protected String result;
     private String uniqueId;
     private String parentId;
+    private List<BaseImage> screenshots;
     private String remarks;
     private String exceptionStacktrace;
     private List<String> logs;

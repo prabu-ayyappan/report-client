@@ -25,3 +25,8 @@
 </Configuration>
 
 ````
+
+- LEAP_MESSAGE#FILE#<FileObject>#<FileName>
+````
+LOGGER.info("LEAP_MESSAGE#FILE#{}#{}", ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE), "searchSelenium.png");
+````
