@@ -20,6 +20,7 @@ public class ExecutiveTestPlan {
     private String toolName;
     private Date startTime;
     private Date endTime;
+    protected long duration;
 
     private AtomicInteger testSuitCount = new AtomicInteger();
     private AtomicInteger testCaseCount = new AtomicInteger();
