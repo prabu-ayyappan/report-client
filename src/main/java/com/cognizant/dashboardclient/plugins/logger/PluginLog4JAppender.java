@@ -15,10 +15,11 @@ import java.util.stream.Collectors;
 
 @Plugin(name = "PluginLog4JAppender", category = Core.CATEGORY_NAME, elementType = Appender.ELEMENT_TYPE)
 public class PluginLog4JAppender extends AbstractAppender {
-    private static PluginLog4JAppender instance ;
+    private static PluginLog4JAppender instance;
+    private List<LogEvent> events = new ArrayList<>();
 
-    public static PluginLog4JAppender getInstance(){
-       // System.out.println("######################PluginLog4JAppender:getInstance()");
+    public static PluginLog4JAppender getInstance() {
+        // System.out.println("######################PluginLog4JAppender:getInstance()");
         return instance;
     }
 
@@ -29,8 +30,6 @@ public class PluginLog4JAppender extends AbstractAppender {
         }
         return instance;
     }
-
-    private List<LogEvent> events = new ArrayList<>();
 
     protected PluginLog4JAppender(String name, Filter filter, Layout<? extends Serializable> layout) {
         super(name, filter, layout);
@@ -49,7 +48,7 @@ public class PluginLog4JAppender extends AbstractAppender {
 
     public LogEvent getEvent(String loggerName, int index) {
         List<LogEvent> newEvents = events.stream().filter(lg -> loggerName.equals(lg.getLoggerName())).collect(Collectors.toList());
-        if(newEvents.size() < index)
+        if (newEvents.size() < index)
             return null;
         return newEvents.get(index);
     }
@@ -66,6 +65,14 @@ public class PluginLog4JAppender extends AbstractAppender {
         return newEvents;
     }
 
+    public List<LogEvent> getEvents(long startTime, long endTime) {
+        List<LogEvent> eventList = events.stream().filter(
+                event -> ((startTime < event.getTimeMillis() && event.getTimeMillis() < endTime)
+                        && event.getThreadId() == Thread.currentThread().getId())
+        ).collect(Collectors.toList());
+        return eventList;
+    }
+
     public List<String> getMessages(String loggerName) {
         List<LogEvent> events = getEvents(loggerName);
         return getMessages(events);
@@ -80,7 +87,12 @@ public class PluginLog4JAppender extends AbstractAppender {
         return getMessages(events);
     }
 
-    private List<String> getMessages(List<LogEvent> events){
+    public List<String> getMessages(long startTime, long endTime) {
+        List<LogEvent> events = getEvents(startTime, endTime);
+        return getMessages(events);
+    }
+
+    private List<String> getMessages(List<LogEvent> events) {
         return events.stream().map(logEvent -> getLayout().toSerializable(logEvent).toString()).collect(Collectors.toList());
     }
 
@@ -90,10 +102,10 @@ public class PluginLog4JAppender extends AbstractAppender {
 
     @PluginFactory
     public static PluginLog4JAppender createAppender(
-        @PluginAttribute("name") String name,
-        @PluginElement("Layout") Layout<? extends Serializable> layout,
-        @PluginElement("Filter") final Filter filter,
-        @PluginAttribute("otherAttribute") String otherAttribute) {
+            @PluginAttribute("name") String name,
+            @PluginElement("Layout") Layout<? extends Serializable> layout,
+            @PluginElement("Filter") final Filter filter,
+            @PluginAttribute("otherAttribute") String otherAttribute) {
 
         if (name == null) {
             LOGGER.error("No name provided for PluginLog4JAppender");

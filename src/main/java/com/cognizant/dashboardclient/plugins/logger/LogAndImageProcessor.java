@@ -20,8 +20,18 @@ public class LogAndImageProcessor {
 
     public void processLogs(String loggerName, String methodName) {
         PluginLog4JAppender instance = PluginLog4JAppender.getInstance();
-        if (instance == null ) return;
+        if (instance == null) return;
         List<LogEvent> events = instance.getEvents(loggerName, methodName);
+        processEvents(events);
+    }
+    public void processLogs(long startTime, long endTime) {
+        PluginLog4JAppender instance = PluginLog4JAppender.getInstance();
+        if (instance == null) return;
+        List<LogEvent> events = instance.getEvents(startTime, endTime);
+        processEvents(events);
+    }
+    private void processEvents(List<LogEvent> events){
+        PluginLog4JAppender instance = PluginLog4JAppender.getInstance();
         events.forEach(event -> {
             LogDetails details = new LogDetails();
 
