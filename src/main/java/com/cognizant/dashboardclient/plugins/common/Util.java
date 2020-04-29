@@ -13,6 +13,11 @@ public class Util {
         log.info(logText);
     }
 
+    public static boolean isLeapEnabled(){
+        TProperties tProperties = TProperties.getInstance();
+        return Boolean.parseBoolean(tProperties.getOrDefault(BaseConstants.LEAP_ENABLE, String.valueOf(true)));
+    }
+
     public static void jsonString(Object object) {
         try {
             ObjectMapper mapper = new ObjectMapper();

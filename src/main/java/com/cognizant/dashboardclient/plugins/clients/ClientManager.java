@@ -17,11 +17,6 @@ public class ClientManager {
     private static TestReportClient testReportClient;
     private static TestReportClient uploadClient;
 
-    public static ExecutiveTestPlan pushData(ExecutiveTestPlan executiveTestPlan){
-        Map headers = TestReportMain.getHeaders();
-        return getTestReportClient().InsertOrUpdateTestPlan(executiveTestPlan, headers);
-    }
-
     public static TestReportClient getTestReportClient(){
         if (testReportClient == null) {
             TProperties properties = TProperties.getInstance();
@@ -51,4 +46,9 @@ public class ClientManager {
         return getUploadClient().addImage(title, multipartFile, uploadHeaders);
     }
 
+
+    public static ExecutiveTestPlan pushData(ExecutiveTestPlan executiveTestPlan){
+        Map headers = TestReportMain.getHeaders();
+        return getTestReportClient().InsertOrUpdateTestPlan(executiveTestPlan, headers);
+    }
 }
