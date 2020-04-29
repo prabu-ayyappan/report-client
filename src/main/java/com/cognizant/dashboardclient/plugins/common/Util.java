@@ -23,6 +23,16 @@ public class Util {
             log.error("Exception while json parsing :", e);
         }
     }
+    public static String returnJsonString(Object object) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+            String writeValueAsString = mapper.writeValueAsString(object);
+            return writeValueAsString;
+        } catch (JsonProcessingException e) {
+            return "";
+        }
+    }
 
     public static String getLastIndexValue(String value, String delimiter) {
         if (value == null || value.equals("") || !value.contains(delimiter)) {
