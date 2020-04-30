@@ -27,7 +27,7 @@ public class TestReportMain {
 
     public static Map<String, String> getHeaders(){
         TProperties properties = TProperties.getInstance();
-        String token = properties.get(BaseConstants.TEST_REPORT_TOKEN);
+        String token = properties.getOrDefault(BaseConstants.TEST_REPORT_TOKEN, "");
         String bearerToken = String.format("Bearer %s", token);
         return new HashMap<String, String>(){{
             put("Authorization", bearerToken);
