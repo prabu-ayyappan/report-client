@@ -1,6 +1,7 @@
 # dashboard-client
 
-- build jar and push to local maven repo `mvn clean build publishToMavenLocal`
+- build jar and push to local maven repo run task `clean build publishToMavenLocal`
+- to build jar with all dependencies run task `shadowJar` 
 
 - log4j2.xml
 ````xml
