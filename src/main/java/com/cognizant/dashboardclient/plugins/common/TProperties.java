@@ -1,5 +1,7 @@
 package com.cognizant.dashboardclient.plugins.common;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +29,25 @@ public class TProperties extends HashMap<String, String> {
             properties.putAll(properties.getProp());
         }
         return properties;
+    }
+
+    public static TProperties getInstance(String fileName) {
+        properties = new TProperties();
+        properties.putAll(readProperties(fileName));
+        return properties;
+    }
+    private static Map<? extends String, ? extends String> readProperties(String propertiesFile) {
+        Properties properties = new Properties();
+        File rp = new File(propertiesFile);
+        if (rp.exists()) {
+            try {
+                FileReader fr = new FileReader(rp);
+                properties.load(fr);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return (Map)properties;
     }
 
 }
