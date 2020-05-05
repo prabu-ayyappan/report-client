@@ -18,11 +18,12 @@ repositories {
 	mavenCentral()
 }
 
+/*shadow(MavenPublication) { publication ->
+			project.shadow.component(publication)
+		}*/
+
 publishing {
 	publications {
-		shadow(MavenPublication) { publication ->
-			project.shadow.component(publication)
-		}
 		mavenJava(MavenPublication) {
 			from components.java
 		}
