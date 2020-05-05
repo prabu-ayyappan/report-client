@@ -6,11 +6,13 @@ import com.cognizant.dashboardclient.plugins.common.SystemInfoUtil;
 import com.cognizant.dashboardclient.plugins.models.BaseAttachment;
 import com.cognizant.dashboardclient.plugins.models.LogDetails;
 import com.cognizant.dashboardclient.plugins.models.LogSystemInfo;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.message.Message;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class LogAndImageProcessor {
@@ -29,6 +31,25 @@ public class LogAndImageProcessor {
         if (instance == null) return;
         List<LogEvent> events = instance.getEvents(startTime, endTime);
         processEvents(events);
+    }
+    public void processStaticLogs(File file) {
+        LogDetails details = new LogDetails();
+        String format = String.format("%s [%s] [%s ] ScreenShot Details - %s%n"
+                , new Timestamp(System.currentTimeMillis()), "main", Level.INFO.name(), file.getAbsolutePath()
+        );
+        details.setMessage(format);
+        details.setTimestamp(Calendar.getInstance().getTime());
+        details.setLevel(Level.INFO.name());
+        details.setSystemInfo(getSystemInfo());
+        Object[] parameters = {file};
+        try {
+            BaseAttachment baseAttachment = sendImage(parameters);
+            attachments.add(baseAttachment);
+            details.setAttachments(Arrays.asList(baseAttachment));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        logs.add(details);
     }
     private void processEvents(List<LogEvent> events){
         PluginLog4JAppender instance = PluginLog4JAppender.getInstance();
