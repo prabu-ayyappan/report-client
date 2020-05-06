@@ -44,13 +44,11 @@ public class ClientManager {
 
         Map<String, String> uploadHeaders = TestReportMain.getUploadHeaders();
         return getUploadClient().addImage(title, multipartFile, uploadHeaders);
-//        return new BaseAttachment();
     }
 
 
     public static ExecutiveTestPlan pushData(ExecutiveTestPlan executiveTestPlan){
         Map headers = TestReportMain.getHeaders();
         return getTestReportClient().InsertOrUpdateTestPlan(executiveTestPlan, headers);
-//        return executiveTestPlan;
     }
 }
