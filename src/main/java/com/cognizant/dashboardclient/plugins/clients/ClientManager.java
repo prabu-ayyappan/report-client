@@ -43,7 +43,16 @@ public class ClientManager {
         MultipartFile multipartFile = new CommonsMultipartFile(fileItem);
 
         Map<String, String> uploadHeaders = TestReportMain.getUploadHeaders();
-        return getUploadClient().addImage(title, multipartFile, uploadHeaders);
+        BaseAttachment baseAttachment;
+        try {
+            baseAttachment = getUploadClient().addImage(title, multipartFile, uploadHeaders);
+        }catch (Exception e){
+            baseAttachment = new BaseAttachment();
+            baseAttachment.setName(title);
+            baseAttachment.setType(multipartFile.getContentType());
+            e.printStackTrace();
+        }
+        return baseAttachment;
     }
 
 
