@@ -4,6 +4,7 @@ import com.cognizant.dashboardclient.plugins.common.BaseConstants;
 import com.cognizant.dashboardclient.plugins.common.TProperties;
 import com.cognizant.dashboardclient.plugins.models.BaseAttachment;
 import com.cognizant.dashboardclient.plugins.models.ExecutiveTestPlan;
+import com.cognizant.dashboardclient.plugins.models.TestCase;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
+
+import static com.cognizant.dashboardclient.plugins.models.StatusEnum.*;
 
 public class ClientManager {
     private static TestReportClient testReportClient;
@@ -59,5 +65,28 @@ public class ClientManager {
     public static ExecutiveTestPlan pushData(ExecutiveTestPlan executiveTestPlan){
         Map headers = TestReportMain.getHeaders();
         return getTestReportClient().InsertOrUpdateTestPlan(executiveTestPlan, headers);
+    }
+
+    public static ExecutiveTestPlan onFinish(ExecutiveTestPlan executiveTestPlan){
+        executiveTestPlan.getTestSuites().forEach(testSuite -> {
+            List<String> statusList = testSuite.getTestCases().stream().map(TestCase::getResult).collect(Collectors.toList());
+            if (new AtomicLong(testSuite.getTestsCount().get()) == testSuite.getPassed()){
+                testSuite.setResult(PASSED.name());
+            } else if (statusList.contains(FAILED.name())) {
+                testSuite.setResult(FAILED.name());
+            } else if (statusList.contains(IGNORE.name()) || statusList.contains(SKIPPED.name())) {
+                testSuite.setResult(SKIPPED.name());
+            } else {
+                testSuite.setResult(UNKNOWN.name());
+            }
+
+            testSuite.getTestCases().forEach(aCase -> {
+                if (IN_PROGRESS.name().equals(aCase.getResult()) || IN_QUEUE.name().equals(aCase.getResult())){
+                    aCase.setResult(UNKNOWN.name());
+                }
+            });
+        });
+
+        return null;
     }
 }
