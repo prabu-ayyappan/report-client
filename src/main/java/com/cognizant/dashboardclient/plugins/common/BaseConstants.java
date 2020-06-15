@@ -13,9 +13,10 @@ public class BaseConstants {
     public static final String LEAP_MESSAGE_FILE = "LEAP_MESSAGE#FILE#";
 
     /*Leap report output*/
+    public static final String LEAP_REPORT_HOST = "leap-report-host";
+    public static final String LEAP_REPORT_REQUEST_PATH = "leap-report-request-path";
+    public static final String LEAP_REPORT_REQUEST_METHOD = "leap-report-request-method";
     public static final String TEST_REPORTS_S = "/test/reports/%s";
-    public static final String LEAP_REPORT_REQUEST_PATH = "leap.report.request.path";
-    public static final String LEAP_REPORT_REQUEST_METHOD = "leap.report.request.method";
     public static final String LEAP_REPORT_REQUEST_METHOD_GET = "GET";
     public static final String LEAP_REPORT_OUTPUT_PATH = "leap.report.output.path";
     public static final String LEAP_REPORT_OUTPUT_DEFAULT_PATH = "./leap-report";

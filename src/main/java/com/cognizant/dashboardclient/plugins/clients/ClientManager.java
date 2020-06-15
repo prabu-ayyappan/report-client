@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 import static com.cognizant.dashboardclient.plugins.common.BaseConstants.*;
@@ -75,7 +74,7 @@ public class ClientManager {
     public static ExecutiveTestPlan onFinish(ExecutiveTestPlan executiveTestPlan) {
         executiveTestPlan.getTestSuites().forEach(testSuite -> {
             List<String> statusList = testSuite.getTestCases().stream().map(TestCase::getResult).collect(Collectors.toList());
-            if (new AtomicLong(testSuite.getTestsCount().get()) == testSuite.getPassed()) {
+            if (testSuite.getPassed().get() == testSuite.getTestsCount().get()) {
                 testSuite.setResult(PASSED.name());
             } else if (statusList.contains(FAILED.name())) {
                 testSuite.setResult(FAILED.name());
@@ -92,8 +91,8 @@ public class ClientManager {
             });
         });
 
-//        return pushData(executiveTestPlan);
-        return null;
+        return pushData(executiveTestPlan);
+//        return null;
     }
 
     private static void leapReportOutput(String executionReportId) {
@@ -106,7 +105,7 @@ public class ClientManager {
         TProperties tProperties = TProperties.getInstance();
         Properties outputProperties = new Properties();
         // set key and value
-        outputProperties.setProperty(TEST_REPORT_URL, tProperties.get(TEST_REPORT_URL));
+        outputProperties.setProperty(LEAP_REPORT_HOST, tProperties.get(TEST_REPORT_URL));
         outputProperties.setProperty(LEAP_REPORT_REQUEST_PATH, String.format(TEST_REPORTS_S, executionReportId));
         outputProperties.setProperty(LEAP_REPORT_REQUEST_METHOD, LEAP_REPORT_REQUEST_METHOD_GET);
 
