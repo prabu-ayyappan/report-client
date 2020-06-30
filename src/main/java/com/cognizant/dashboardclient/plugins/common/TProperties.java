@@ -1,5 +1,7 @@
 package com.cognizant.dashboardclient.plugins.common;
 
+import org.springframework.util.StringUtils;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,11 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import static com.cognizant.dashboardclient.plugins.common.BaseConstants.*;
+
 /**
  * Created by 784420 on 3/18/2020 6:57 PM
  */
 public class TProperties extends HashMap<String, String> {
     private static TProperties properties ;
+    Properties systemProperties = System.getProperties();
     private TProperties() {}
     private Map<? extends String, ? extends String> getProp(){
         Properties prop = new Properties();
@@ -20,6 +25,20 @@ public class TProperties extends HashMap<String, String> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        /*System Properties*/
+        String projectName = (String) systemProperties.get(PROJECT_NAME);
+        String executionName = (String) systemProperties.get(EXECUTION_NAME);
+        String testReportURL = (String) systemProperties.get(TEST_REPORT_URL);
+        String leapEnable = (String) systemProperties.get(LEAP_ENABLE);
+        String testReportToken = (String) systemProperties.get(TEST_REPORT_TOKEN);
+
+        if (!StringUtils.isEmpty(projectName)) properties.put(PROJECT_NAME, projectName);
+        if (!StringUtils.isEmpty(executionName)) properties.put(EXECUTION_NAME, executionName);
+        if (!StringUtils.isEmpty(testReportURL)) properties.put(TEST_REPORT_URL, testReportURL);
+        if (!StringUtils.isEmpty(leapEnable)) properties.put(LEAP_ENABLE, leapEnable);
+        if (!StringUtils.isEmpty(testReportToken)) properties.put(TEST_REPORT_TOKEN, testReportToken);
+
         return (Map)prop;
     }
 
