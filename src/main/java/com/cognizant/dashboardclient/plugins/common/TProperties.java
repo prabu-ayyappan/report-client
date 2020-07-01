@@ -33,11 +33,11 @@ public class TProperties extends HashMap<String, String> {
         String leapEnable = (String) systemProperties.get(LEAP_ENABLE);
         String testReportToken = (String) systemProperties.get(TEST_REPORT_TOKEN);
 
-        if (!StringUtils.isEmpty(projectName)) properties.put(PROJECT_NAME, projectName);
-        if (!StringUtils.isEmpty(executionName)) properties.put(EXECUTION_NAME, executionName);
-        if (!StringUtils.isEmpty(testReportURL)) properties.put(TEST_REPORT_URL, testReportURL);
-        if (!StringUtils.isEmpty(leapEnable)) properties.put(LEAP_ENABLE, leapEnable);
-        if (!StringUtils.isEmpty(testReportToken)) properties.put(TEST_REPORT_TOKEN, testReportToken);
+        if (!StringUtils.isEmpty(projectName)) prop.put(PROJECT_NAME, projectName);
+        if (!StringUtils.isEmpty(executionName)) prop.put(EXECUTION_NAME, executionName);
+        if (!StringUtils.isEmpty(testReportURL)) prop.put(TEST_REPORT_URL, testReportURL);
+        if (!StringUtils.isEmpty(leapEnable)) prop.put(LEAP_ENABLE, leapEnable);
+        if (!StringUtils.isEmpty(testReportToken)) prop.put(TEST_REPORT_TOKEN, testReportToken);
 
         return (Map)prop;
     }
