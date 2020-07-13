@@ -21,7 +21,7 @@ public class TestReportMain {
                 .encoder(new JacksonEncoder())
                 .decoder(new JacksonDecoder())
                 .logger(new Slf4jLogger(TestReportClient.class))
-                .logLevel(Logger.Level.FULL)
+                .logLevel(Logger.Level.NONE)  // changed to NONE instead of FULL
                 .target(TestReportClient.class, feignURL);
     }
 
@@ -44,7 +44,7 @@ public class TestReportMain {
                 .encoder(new SpringFormEncoder())
                 .decoder(new JacksonDecoder())
                 .logger(new Slf4jLogger(TestReportClient.class))
-                .logLevel(Logger.Level.FULL)
+                .logLevel(Logger.Level.NONE)  // changed to NONE instead of FULL
                 .target(TestReportClient.class, feignURL);
     }
 
