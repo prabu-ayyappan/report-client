@@ -23,4 +23,7 @@ public class BaseConstants {
     public static final String LEAP_REPORT_OUTPUT_S_PROPERTIES = "leap-report-output-%s.properties";
     public static final String LEAP_REPORT_OUTPUT_PROPERTIES_FILE = "Leap report output properties file";
 
+    /*Custom header*/
+    public static final String CUSTOM_TOKEN_ID = "X-leap-token-id";
+
 }

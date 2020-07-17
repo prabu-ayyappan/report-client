@@ -25,16 +25,6 @@ public class TestReportMain {
                 .target(TestReportClient.class, feignURL);
     }
 
-    public static Map<String, String> getHeaders(){
-        TProperties properties = TProperties.getInstance();
-        String token = properties.getOrDefault(BaseConstants.TEST_REPORT_TOKEN, "");
-        String bearerToken = String.format("Bearer %s", token);
-        return new HashMap<String, String>(){{
-            put("Authorization", bearerToken);
-        }
-        };
-    }
-
     public static TestReportClient getUploadClient(){
         TProperties properties = TProperties.getInstance();
         String feignURL = properties.get(BaseConstants.TEST_REPORT_URL);
@@ -48,13 +38,25 @@ public class TestReportMain {
                 .target(TestReportClient.class, feignURL);
     }
 
+    public static Map<String, String> getHeaders(){
+        TProperties properties = TProperties.getInstance();
+        String token = properties.getOrDefault(BaseConstants.TEST_REPORT_TOKEN, "");
+//        String bearerToken = String.format("Bearer %s", token);
+        return new HashMap<String, String>(){{
+            //put("Authorization", bearerToken);
+            put(BaseConstants.CUSTOM_TOKEN_ID, token);
+        }
+        };
+    }
+
     public static Map<String, String> getUploadHeaders(){
 
         TProperties properties = TProperties.getInstance();
         String token = properties.get(BaseConstants.TEST_REPORT_TOKEN);
-        String bearerToken = String.format("Bearer %s", token);
+//        String bearerToken = String.format("Bearer %s", token);
         HashMap<String, String> map = new HashMap<>();
-        map.put("Authorization", bearerToken);
+//        map.put("Authorization", bearerToken);
+        map.put(BaseConstants.CUSTOM_TOKEN_ID, token);
         map.put("Content-Type", "multipart/form-data;boundary=---------------------------7da24f2e50046");
 
         return map;
