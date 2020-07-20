@@ -44,7 +44,6 @@ public class TestReportMain {
         String bearerToken = String.format("Bearer %s", token);
         return new HashMap<String, String>(){{
             put("Authorization", bearerToken);
-//            put(BaseConstants.CUSTOM_TOKEN_ID, token);
         }
         };
     }
@@ -56,7 +55,6 @@ public class TestReportMain {
         String bearerToken = String.format("Bearer %s", token);
         HashMap<String, String> map = new HashMap<>();
         map.put("Authorization", bearerToken);
-//        map.put(BaseConstants.CUSTOM_TOKEN_ID, token);
         map.put("Content-Type", "multipart/form-data;boundary=---------------------------7da24f2e50046");
 
         return map;
