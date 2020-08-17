@@ -1,4 +1,4 @@
-# dashboard-client
+# report-client
 
 - build jar and push to local maven repo run task `clean build publishToMavenLocal`
 - to build jar with all dependencies run task `shadowJar` 
@@ -6,7 +6,7 @@
 - log4j2.xml
 ````xml
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" packages="com.cognizant.dashboardclient.plugins.logger">
+<Configuration status="WARN" packages="com.cognizant.reportclient.plugins.logger">
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_OUT">
             <PatternLayout
