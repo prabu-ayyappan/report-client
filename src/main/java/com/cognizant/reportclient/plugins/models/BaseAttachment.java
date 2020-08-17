@@ -1,4 +1,4 @@
-package com.cognizant.dashboardclient.plugins.models;
+package com.cognizant.reportclient.plugins.models;
 
 import lombok.Data;
 

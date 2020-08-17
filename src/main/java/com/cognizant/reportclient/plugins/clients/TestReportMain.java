@@ -1,7 +1,7 @@
-package com.cognizant.dashboardclient.plugins.clients;
+package com.cognizant.reportclient.plugins.clients;
 
-import com.cognizant.dashboardclient.plugins.common.BaseConstants;
-import com.cognizant.dashboardclient.plugins.common.TProperties;
+import com.cognizant.reportclient.plugins.common.BaseConstants;
+import com.cognizant.reportclient.plugins.common.TProperties;
 import feign.Feign;
 import feign.Logger;
 import feign.form.spring.SpringFormEncoder;
@@ -21,7 +21,7 @@ public class TestReportMain {
                 .encoder(new JacksonEncoder())
                 .decoder(new JacksonDecoder())
                 .logger(new Slf4jLogger(TestReportClient.class))
-                .logLevel(Logger.Level.NONE)  // changed to NONE instead of FULL
+                .logLevel(Logger.Level.FULL)  // changed to NONE instead of FULL
                 .target(TestReportClient.class, feignURL);
     }
 
@@ -34,7 +34,7 @@ public class TestReportMain {
                 .encoder(new SpringFormEncoder())
                 .decoder(new JacksonDecoder())
                 .logger(new Slf4jLogger(TestReportClient.class))
-                .logLevel(Logger.Level.NONE)  // changed to NONE instead of FULL
+                .logLevel(Logger.Level.FULL)  // changed to NONE instead of FULL
                 .target(TestReportClient.class, feignURL);
     }
 

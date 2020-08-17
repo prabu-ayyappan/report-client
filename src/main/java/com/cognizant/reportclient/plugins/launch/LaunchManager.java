@@ -1,8 +1,8 @@
-package com.cognizant.dashboardclient.plugins.launch;
+package com.cognizant.reportclient.plugins.launch;
 
-import com.cognizant.dashboardclient.plugins.common.BaseConstants;
-import com.cognizant.dashboardclient.plugins.common.TProperties;
-import com.cognizant.dashboardclient.plugins.models.ExecutiveTestPlan;
+import com.cognizant.reportclient.plugins.common.BaseConstants;
+import com.cognizant.reportclient.plugins.common.TProperties;
+import com.cognizant.reportclient.plugins.models.ExecutiveTestPlan;
 
 import java.util.Calendar;
 

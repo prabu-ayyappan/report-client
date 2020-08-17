@@ -1,4 +1,4 @@
-package com.cognizant.dashboardclient.plugins.common;
+package com.cognizant.reportclient.plugins.common;
 
 public class BaseConstants {
     public static final String ENVIRONMENT = "environment";

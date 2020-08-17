@@ -1,4 +1,4 @@
-package com.cognizant.dashboardclient.plugins.models;
+package com.cognizant.reportclient.plugins.models;
 
 /**
  * Created by 784420 on 3/12/2020 4:12 PM

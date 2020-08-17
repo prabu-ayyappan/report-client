@@ -1,10 +1,11 @@
-package com.cognizant.dashboardclient.plugins.clients;
+package com.cognizant.reportclient.plugins.clients;
 
-import com.cognizant.dashboardclient.plugins.common.BaseConstants;
-import com.cognizant.dashboardclient.plugins.common.TProperties;
-import com.cognizant.dashboardclient.plugins.models.BaseAttachment;
-import com.cognizant.dashboardclient.plugins.models.ExecutiveTestPlan;
-import com.cognizant.dashboardclient.plugins.models.TestCase;
+import com.cognizant.reportclient.plugins.common.BaseConstants;
+import com.cognizant.reportclient.plugins.common.TProperties;
+import com.cognizant.reportclient.plugins.models.BaseAttachment;
+import com.cognizant.reportclient.plugins.models.ExecutiveTestPlan;
+import com.cognizant.reportclient.plugins.models.TestCase;
+import com.cognizant.reportclient.plugins.models.StatusEnum;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,9 +19,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import static com.cognizant.dashboardclient.plugins.common.BaseConstants.*;
-import static com.cognizant.dashboardclient.plugins.models.StatusEnum.*;
-
 public class ClientManager {
     private static TestReportClient testReportClient;
     private static TestReportClient uploadClient;
@@ -28,7 +26,7 @@ public class ClientManager {
     public static TestReportClient getTestReportClient() {
         if (testReportClient == null) {
             TProperties properties = TProperties.getInstance();
-            testReportClient = TestReportMain.getTestReportClient(properties.get(TEST_REPORT_URL));
+            testReportClient = TestReportMain.getTestReportClient(properties.get(BaseConstants.TEST_REPORT_URL));
         }
         return testReportClient;
     }
@@ -75,18 +73,18 @@ public class ClientManager {
         executiveTestPlan.getTestSuites().forEach(testSuite -> {
             List<String> statusList = testSuite.getTestCases().stream().map(TestCase::getResult).collect(Collectors.toList());
             if (testSuite.getPassed().get() == testSuite.getTestsCount().get()) {
-                testSuite.setResult(PASSED.name());
-            } else if (statusList.contains(FAILED.name())) {
-                testSuite.setResult(FAILED.name());
-            } else if (statusList.contains(IGNORE.name()) || statusList.contains(SKIPPED.name())) {
-                testSuite.setResult(SKIPPED.name());
+                testSuite.setResult(StatusEnum.PASSED.name());
+            } else if (statusList.contains(StatusEnum.FAILED.name())) {
+                testSuite.setResult(StatusEnum.FAILED.name());
+            } else if (statusList.contains(StatusEnum.IGNORE.name()) || statusList.contains(StatusEnum.SKIPPED.name())) {
+                testSuite.setResult(StatusEnum.SKIPPED.name());
             } else {
-                testSuite.setResult(UNKNOWN.name());
+                testSuite.setResult(StatusEnum.UNKNOWN.name());
             }
 
             testSuite.getTestCases().forEach(aCase -> {
-                if (IN_PROGRESS.name().equals(aCase.getResult()) || IN_QUEUE.name().equals(aCase.getResult())) {
-                    aCase.setResult(UNKNOWN.name());
+                if (StatusEnum.IN_PROGRESS.name().equals(aCase.getResult()) || StatusEnum.IN_QUEUE.name().equals(aCase.getResult())) {
+                    aCase.setResult(StatusEnum.UNKNOWN.name());
                 }
             });
         });
@@ -98,16 +96,16 @@ public class ClientManager {
     private static void leapReportOutput(String executionReportId) {
 
         String fileName = String.format(BaseConstants.LEAP_REPORT_OUTPUT_S_PROPERTIES, executionReportId);
-        String outputPath = (String) System.getProperties().getOrDefault(LEAP_REPORT_OUTPUT_PATH, LEAP_REPORT_OUTPUT_DEFAULT_PATH);
+        String outputPath = (String) System.getProperties().getOrDefault(BaseConstants.LEAP_REPORT_OUTPUT_PATH, BaseConstants.LEAP_REPORT_OUTPUT_DEFAULT_PATH);
         File file = new File(outputPath);
         file.mkdirs();
 
         TProperties tProperties = TProperties.getInstance();
         Properties outputProperties = new Properties();
         // set key and value
-        outputProperties.setProperty(LEAP_REPORT_HOST, tProperties.get(TEST_REPORT_URL));
-        outputProperties.setProperty(LEAP_REPORT_REQUEST_PATH, String.format(TEST_REPORTS_S, executionReportId));
-        outputProperties.setProperty(LEAP_REPORT_REQUEST_METHOD, LEAP_REPORT_REQUEST_METHOD_GET);
+        outputProperties.setProperty(BaseConstants.LEAP_REPORT_HOST, tProperties.get(BaseConstants.TEST_REPORT_URL));
+        outputProperties.setProperty(BaseConstants.LEAP_REPORT_REQUEST_PATH, String.format(BaseConstants.TEST_REPORTS_S, executionReportId));
+        outputProperties.setProperty(BaseConstants.LEAP_REPORT_REQUEST_METHOD, BaseConstants.LEAP_REPORT_REQUEST_METHOD_GET);
 
         try {
             outputProperties.store(

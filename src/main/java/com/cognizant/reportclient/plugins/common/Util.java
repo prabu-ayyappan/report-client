@@ -1,4 +1,4 @@
-package com.cognizant.dashboardclient.plugins.common;
+package com.cognizant.reportclient.plugins.common;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

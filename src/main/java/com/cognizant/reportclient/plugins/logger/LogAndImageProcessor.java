@@ -1,11 +1,11 @@
-package com.cognizant.dashboardclient.plugins.logger;
+package com.cognizant.reportclient.plugins.logger;
 
-import com.cognizant.dashboardclient.plugins.clients.ClientManager;
-import com.cognizant.dashboardclient.plugins.common.BaseConstants;
-import com.cognizant.dashboardclient.plugins.common.SystemInfoUtil;
-import com.cognizant.dashboardclient.plugins.models.BaseAttachment;
-import com.cognizant.dashboardclient.plugins.models.LogDetails;
-import com.cognizant.dashboardclient.plugins.models.LogSystemInfo;
+import com.cognizant.reportclient.plugins.clients.ClientManager;
+import com.cognizant.reportclient.plugins.common.BaseConstants;
+import com.cognizant.reportclient.plugins.common.SystemInfoUtil;
+import com.cognizant.reportclient.plugins.models.BaseAttachment;
+import com.cognizant.reportclient.plugins.models.LogDetails;
+import com.cognizant.reportclient.plugins.models.LogSystemInfo;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.message.Message;

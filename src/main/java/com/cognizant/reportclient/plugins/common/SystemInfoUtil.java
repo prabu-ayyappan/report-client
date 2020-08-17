@@ -1,4 +1,4 @@
-package com.cognizant.dashboardclient.plugins.common;
+package com.cognizant.reportclient.plugins.common;
 
 import org.apache.commons.lang3.SystemUtils;
 

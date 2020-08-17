@@ -1,7 +1,7 @@
-package com.cognizant.dashboardclient.plugins.clients;
+package com.cognizant.reportclient.plugins.clients;
 
-import com.cognizant.dashboardclient.plugins.models.BaseAttachment;
-import com.cognizant.dashboardclient.plugins.models.ExecutiveTestPlan;
+import com.cognizant.reportclient.plugins.models.BaseAttachment;
+import com.cognizant.reportclient.plugins.models.ExecutiveTestPlan;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

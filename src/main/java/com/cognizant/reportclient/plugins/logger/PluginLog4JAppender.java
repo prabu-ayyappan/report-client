@@ -1,4 +1,4 @@
-package com.cognizant.dashboardclient.plugins.logger;
+package com.cognizant.reportclient.plugins.logger;
 
 import org.apache.logging.log4j.core.*;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
